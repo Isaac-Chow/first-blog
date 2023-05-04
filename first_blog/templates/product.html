@@ -1,0 +1,40 @@
+{% extends "includes/base.html" %}
+
+{% block title %}
+<!-- Use the product name to display the title -->
+{{product["title"]}}
+{% endblock %}
+
+{% block content%}
+<!-- Product Title Start -->
+<h1>
+    {{product["title"]}}
+</h1>
+<!-- Product Title End -->
+
+<!-- Product Price Start -->
+<p>
+    Price:{{product["price"]}}
+</p>
+<!-- Product Price End -->
+
+<!-- Product Description Start -->
+<!-- ampersand & -->
+<p>
+    {{product["Description"]}}(&lt;- That is a description incase you don't know)
+</p>
+<!-- Product Description End -->
+
+<!-- Product Category Start -->
+<p>
+    Category:{{product["category"]}}
+</p>
+<!-- Product Category End -->
+
+<!-- Product Image Start -->
+<img src="{{product['image']}}" alt="{{ product['category'] }}">
+<!-- Product Image Start -->
+<p>
+    rating:{{product["rating"]}}
+</p>
+{% endblock %}

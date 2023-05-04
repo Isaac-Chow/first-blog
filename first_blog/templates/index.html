@@ -1,0 +1,35 @@
+{% extends "includes/base.html" %}
+
+{% block title %}
+Homepage: Welcome to My Homepage
+{% endblock %}
+
+{% block content%}
+    <H1>just anything</H1>
+<div id="display" class="container d-flex">
+    {% for datum in data %}
+    <!-- product card START -->
+    <div class="card m-3" style="width: 18rem;">
+        <img src="datum['image']" class="card-img-top" alt="{{ datum['category'] }}">
+        <div class="card-body">
+            <h5 class="card-title"> {{ datum["title"] }} </h5>
+            <p class="card-text">{{ datum["price"] }}</p>
+            <p class="card-text">{{datum["description"]}}</p>
+            <span class="d-flex justify-content-between">
+                <a href="#" class="btn btn-success">Buy</a>
+                <a href="{{ url_for('product', str=datum[])) }}" class="btn btn-info">More Info</a>
+            </span>
+        </div>
+    </div>
+    <!-- Product Card END -->
+    {%endfor%}
+</div>
+<style>
+    #display {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+</style>
+{% endblock %}

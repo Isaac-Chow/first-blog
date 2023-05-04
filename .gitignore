@@ -1,0 +1,3 @@
+venv/
+# ignore python cache
+*pyc
