@@ -1,8 +1,8 @@
 # For flask_wtf, the "wtf" in the name doesn't mean what you think. It means WSGITemplateForms. On the other hand, "WIGI" means ?
 from flask_wtf import FlaskForm,RecaptchaField
-from wtforms import StringField,IntegerField,TextField
+from wtforms import StringField,IntegerField
 from wtforms.validators import DataRequired
-from models import User, Product
+from .models import User, Product
 
 """
 To Note:
