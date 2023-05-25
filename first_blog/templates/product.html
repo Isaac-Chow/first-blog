@@ -1,40 +1,41 @@
+<!-- [DONE] -->
 {% extends "includes/base.html" %}
 
-{% block title %}
 <!-- Use the product name to display the title -->
-{{product["title"]}}
+{% block title %}
+{{product_jinja["title"]}}
 {% endblock %}
 
 {% block content%}
 <!-- Product Title Start -->
 <h1>
-    {{product["title"]}}
+    {{product_jinja["title"]}}
 </h1>
 <!-- Product Title End -->
 
 <!-- Product Price Start -->
 <p>
-    Price:{{product["price"]}}
+    Price:{{product_jinja["price"]}}
 </p>
 <!-- Product Price End -->
 
 <!-- Product Description Start -->
 <!-- ampersand & -->
 <p>
-    {{product["Description"]}}(&lt;- That is a description incase you don't know)
+    {{product_jinja["description"]}}(&lt;- That is a description incase you don't know)
 </p>
 <!-- Product Description End -->
 
 <!-- Product Category Start -->
 <p>
-    Category:{{product["category"]}}
+    Category:{{product_jinja["category"]}}
 </p>
 <!-- Product Category End -->
 
 <!-- Product Image Start -->
-<img src="{{product['image']}}" alt="{{ product['category'] }}">
+<img src="{{product_jinja['image']}}" alt="{{ product_jinja['category'] }}">
 <!-- Product Image Start -->
 <p>
-    rating:{{product["rating"]}}
+    rating:{{product_jinja["rating"]}}
 </p>
 {% endblock %}

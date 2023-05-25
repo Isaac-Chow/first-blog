@@ -1,37 +1,36 @@
 from first_blog import app
-from flask import render_template
+from flask import render_template,request
 import json
+from .models import db,Product,User
+from .forms import UserRegForm
+
+@app.shell_context_processor
+def make_shell_context():
+    return dict(app=app,db=db,User=User,Product=Product)
 
 # with open("static/products.json", "r") as p:
 #     data=json.load(p)
 
 dataItems = [
     {
-        "fcf3be5945a84eeebc9406ac65f7ca03" : {
-                "id": 1,
-                "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-                "price": 109.95,
-                "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-                "category": "men's clothing",
-                "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-                "rating": {
-                    "rate": 3.9,
-                    "count": 120
-                }
-            }
+            "id": 1,
+            "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+            "price": 109.95,
+            "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+            "category": "men's clothing",
+            "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            "rating": {"rate": 3.9,"count": 120}
     },
     {
-        'eceb468ea6394a63a8c2ef7ca73eda29' : {
-            "id": 2,
-            "title": "Mens Casual Premium Slim Fit T-Shirts ",
-            "price": 22.3,
-            "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
-            "category": "men's clothing",
-            "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-            "rating": {
-                "rate": 4.1,
-                "count": 259
-            }
+        "id": 2,
+        "title": "Mens Casual Premium Slim Fit T-Shirts ",
+        "price": 22.3,
+        "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+        "category": "men's clothing",
+        "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+        "rating": {
+            "rate": 4.1,
+            "count": 259
         }
     },
     {
@@ -275,14 +274,29 @@ def article():
 
 # Create a path for /products/<str>
 # define a function called  product
-@app.route("/products/<str>")
-def product(str):
+@app.route("/products/<int:id>")
+def product(id):
     # Access the item passed from the dictionary
+    product_py = dict()
     
-    # if dataItems.has_key(str):
-    product = dataItems[str]
+    for item in dataItems:
+        if item['id'] == id:
+            product_py = item
+
+
     
     return render_template(
-        "product.hml",
-        product
+        "product.html",
+        product_jinja=product_py
     )
+
+@app.route("/register",methods=["GET","POST"])
+def register():
+    if request.method=="GET":
+        register=UserRegForm()
+        return render_template(
+            "register.html",
+            register=register
+        )
+    if request.method=="POST":
+        pass

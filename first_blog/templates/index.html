@@ -6,18 +6,18 @@ Homepage: Welcome to My Homepage
 
 {% block content%}
     <H1>just anything</H1>
-<div id="display" class="container d-flex">
+    <div id="display" class="container d-flex">
     {% for datum in data %}
     <!-- product card START -->
     <div class="card m-3" style="width: 18rem;">
-        <img src="datum['image']" class="card-img-top" alt="{{ datum['category'] }}">
+        <img src="{{ datum['image'] }}" class="card-img-top" alt="{{ datum['category'] }}">
         <div class="card-body">
             <h5 class="card-title"> {{ datum["title"] }} </h5>
             <p class="card-text">{{ datum["price"] }}</p>
             <p class="card-text">{{datum["description"]}}</p>
             <span class="d-flex justify-content-between">
                 <a href="#" class="btn btn-success">Buy</a>
-                <a href="{{ url_for('product', str=datum[])) }}" class="btn btn-info">More Info</a>
+                <a href="{{ url_for('product', id=datum['id'])}}" class="btn btn-info">More Info</a>
             </span>
         </div>
     </div>

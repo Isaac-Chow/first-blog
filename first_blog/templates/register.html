@@ -1,0 +1,14 @@
+{% extend "includes/base.html" %}
+
+{% block title %}
+Registration
+{% endblock %}
+
+{% block content %}
+<form>
+    {{register.csrf_token()}}
+
+    {{register.name.label}}
+    {{register.name(class_="form-controll")}}
+</form>
+{% endblock %}
