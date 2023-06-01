@@ -9,6 +9,16 @@ Registration
     {{register.csrf_token()}}
 
     {{register.name.label}}
-    {{register.name(class_="form-controll")}}
+    {{register.name(class_="form-control")}}
+
+    {{register.email.label}}
+    {{register.email(class_="form-control")}}
+
+    {{register.password.label}}
+    {{register.password(class_="form-control")}}
+
+    {{register.recaptcha.label}}
+    {{register.recaptcha(class_="form-control")}}
+
 </form>
 {% endblock %}

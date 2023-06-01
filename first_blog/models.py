@@ -33,16 +33,46 @@ class Product(db.Model):
     #     super.__init__()
 # The product should have the followwing attributes:
 # id
-        id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-        # title
-        title=db.Column(db.String, nullable=False)
-        # price
-        price=db.Column(db.Integer, nullable=False)
-        # description
-        desc=db.Column(db.String, nullable=False)
-        # category
-        category=db.Column(db.String, nullable=False)
-        # image
-        img=db.Column(db.String, nullable=False)
-        # rating
-        rating=db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    # title
+    title=db.Column(db.String, nullable=False)
+    # price
+    price=db.Column(db.Integer, nullable=False)
+    # description
+    desc=db.Column(db.String, nullable=False)
+    # category
+    category=db.Column(db.String, nullable=False)
+    # image
+    img=db.Column(db.String, nullable=False)
+    # rating
+    rating=db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f"<Product({self.title} {self.price} {self.category})>"
+
+class Order(db.Model):
+    
+    # link the order to a specific user using a foreign key
+    user_id=db.Column(
+        db.Integer,db.ForeignKey("user.id"),nullable=False
+    )
+
+    # Create a relationship between order and user
+    user=db.relationship(
+         "User",backref=db.backref("order",lazy=True)
+    )
+
+    # link the order to a specific user using a foreign key
+    product_id=db.Column(
+        db.Integer,db.ForeignKey("product.id"),nullable=False
+    )
+
+    # Create a relationship between order and user
+    product=db.relationship(
+         "Product",backref=db.backref("order",lazy=True)
+    )
+
+    id=db.Column(db.Integer, primary_key=True)
+
+    def __repr__(self):
+        return f"<Product({self.user}, {self.product})>"

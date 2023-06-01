@@ -1,7 +1,7 @@
 from first_blog import app
 from flask import render_template,request
 import json
-from .models import db,Product,User
+from .models import db,Product,User,Order
 from .forms import UserRegForm
 
 @app.shell_context_processor
@@ -250,6 +250,10 @@ dataItems = [
         }
     }
 ]
+
+@app.shell_context_processor
+def make_shell_context():
+    return{"app":app, "db":db, "User":User, "Product":Product, "Order":Order}
 
 @app.route("/")
 @app.route("/home")
