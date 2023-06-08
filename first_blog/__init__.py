@@ -6,11 +6,11 @@ from first_blog.config import DevelopmentConfig as D
 # > The third argument is the name of the folder that contains static files
 # > The fourth argument is the path to the static folder
 # Reference: https://flask.palletsprojects.com/en/2.2.x/api/#flask.Flask
-app=Flask(
+app = Flask(
     __name__,
     template_folder="templates",
     static_folder="../static",
-    static_url_path="/../static"
+    static_url_path="/static"
 )
 
 # Setup the configuration

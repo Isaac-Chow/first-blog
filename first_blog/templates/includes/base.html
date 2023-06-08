@@ -53,9 +53,24 @@
                                 aria-haspopup="true" aria-expanded="false">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url_for('article')}}" 
-                                aria-haspopup="true" aria-expanded="false">Article</a>
+                            <a class="nav-link" href="{{url_for('addproduct')}}" 
+                                aria-haspopup="true" aria-expanded="false">Add Products</a>
                         </li>
+                        {% if login %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('logout')}}" 
+                            aria-haspopup="true" aria-expanded="false">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('login')}}" 
+                            aria-haspopup="true" aria-expanded="false">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('register')}}" 
+                            aria-haspopup="true" aria-expanded="false">Register</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
     
