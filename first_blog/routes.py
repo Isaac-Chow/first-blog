@@ -29,13 +29,17 @@ def make_shell_context():
     return {"app": app, "db": db, "User": User, "Product": Product, "Order": Order}
 
 
+#############################################
+# Public URL Map    #########################
+#############################################
+
 @app.route("/")
 @app.route("/home")
 @app.route("/index")
 def home():
     global dataItems
     return render_template(
-        "index.html",
+        "public/index.html",
         data=dataItems
     )
 
@@ -43,15 +47,15 @@ def home():
 @app.route("/about")
 def about():
     return render_template(
-        "about.html"
+        "public/about.html"
     )
 
 
-@app.route("/article")
-def article():
-    return render_template(
-        "article.html"
-    )
+# @app.route("/article")
+# def article():
+#     return render_template(
+#         "article.html"
+#     )
 
 # Create a path for /products/<str>
 # define a function called  product
@@ -60,29 +64,49 @@ def article():
 @app.route("/products/<int:id>")
 def product(id):
     # Access the item passed from the dictionary
-    product_py = dict()
+    if id > len(dataItems):
+        return render_template(
+            "public/404.html"
+        )
+    else:
+        product_py = dataItems[id - 1]
 
-    for item in dataItems:
-        # item['name']
-        if item.id == id:
-            product_py = item
+        import math
+        product_py = dict()
 
-    return render_template(
-        "product.html",
-        product_jinja=product_py
-    )
+        for item in dataItems:
+            if item.id == id:
+                product_py = item
+                roudend_rating = math.floor(product_py.rating)
+
+        return render_template(
+            "public/product.html",
+            product_jinja=product_py,
+            roudend_rating=roudend_rating
+        )
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    register = UserRegForm()
     if request.method == "GET":
-        register = UserRegForm()
         return render_template(
-            "register.html",
+            "public/register.html",
             register=register
         )
     if request.method == "POST":
-        pass
+        if register.validate():
+            user=User(
+                name=register.name.data,
+                email=register.email.data,
+                phone=register.phone.data,
+                password=register.password.data
+            )
+        #FIXME:Hash the password
+            with app.app_context():
+                db.session.add(user)
+                db.session.commit()
+            return redirect(url_for("login"))
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -91,7 +115,7 @@ def login():
         login: LoginForm = LoginForm()
 
         return render_template(
-            "login.html",
+            "public/login.html",
             login=login
         )
     if request.method == "POST":
@@ -104,13 +128,17 @@ def logout():
     return redirect(url_for("login"))
 
 
+#############################################
+# Admin URL Map    #########################
+#############################################
+
 @app.route("/addproduct/", methods=["GET", "POST"])
 def addproduct():
     if request.method == "GET":
         addproduct: ProductForm = ProductForm()
         searchproduct: SearchForm = SearchForm()
         return render_template(
-            "addproduct.html",
+            "admin/addproduct.html",
             addproduct=addproduct,
             searchproduct=searchproduct
         )
@@ -147,12 +175,12 @@ def addproduct():
 @app.route("/added_successfully")
 def added_successfully():
     return render_template(
-        "added_successfully.html"
+        "admin/added_successfully.html"
     )
 
 
 @app.route("/failed_add")
 def failed_add():
     return render_template(
-        "failed_add.html"
+        "admin/failed_add.html"
     )

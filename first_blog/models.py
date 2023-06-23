@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from . import app
 from .products import data
-
+from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy(app)
 
 
@@ -19,6 +19,7 @@ class User(db.Model):
     # column for phone
     phone = db.Column(db.String, nullable=False)
 
+
     # define str method that returns the name of teh user
     def __str__(self) -> str:
         return f"Name: {self.name}, Email: {self.email}"
@@ -27,7 +28,16 @@ class User(db.Model):
     def __repr__(self) -> str:
         return f"<Name: {self.name}, Password: {self.password} Email: {self.email}>"
 
+    @property
+    def password(self):
+        return "You can't access the password"
+    
+    def set_password(self,password):
+        self.pw=generate_password_hash(password)
 
+    def verify_password(self,password):
+        return check_password_hash(self.pw,password)
+    
 # Create and define a class called Product
 class Product(db.Model):
     # def __init__(self, title, price, description, category, rating ):

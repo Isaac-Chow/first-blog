@@ -20,6 +20,7 @@ class UserRegForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired()])
     password = StringField("Password", validators=[DataRequired()])
+    phone = IntegerField("Phone Number", validators=[DataRequired()])
     recaptcha = RecaptchaField()
     submit = SubmitField("Register")
 
