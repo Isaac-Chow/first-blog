@@ -16,7 +16,6 @@ To Note:
 
 """
 
-
 class UserRegForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired()])
@@ -61,7 +60,17 @@ class UserRegForm(FlaskForm):
 #
 class ProductForm(FlaskForm):
     #################### YOUR CODE STARTS HERE ##################
+    title = StringField("Title",validators=[DataRequired()]);
+    price = IntegerField("Price",validators=[DataRequired()])
+    desc = TextAreaField("Description",validators=[DataRequired()])
+    category = StringField("Category",validators=[DataRequired()])
+    img = StringField("Image URL",validators=[DataRequired()])
+    rating = IntegerField("Rating",validators=[DataRequired()])
+    recaptcha = RecaptchaField("Recaptcha")
+    submit = SubmitField("Confirm deatails and publish product")
 
+    def __repr__(self):
+        return f"ProductForm({self.title},{self.price},{self.desc},{self.category},{self.img},{self.rating})"
     #################### YOUR CODE ENDS HERE ####################
 
     def validate(self):

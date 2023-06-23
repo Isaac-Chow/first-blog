@@ -5,6 +5,7 @@ from .models import db, Product, User, Order, create_db, add_data
 from .forms import UserRegForm, ProductForm, SearchForm, LoginForm
 from first_blog.products import data
 
+
 # Since we are using SQLAlchemy, we can query the database for the data
 # use app.app_context() to access the app since the db is not in the same file
 # Reference: https://flask.palletsprojects.com/en/2.0.x/appcontext/#manually-push-a-context
@@ -15,6 +16,7 @@ with app.app_context():
     add_data()
     # query the database for the data
     dataItems = Product.query.all()
+    # users = User.query.all()
 
 
 @app.shell_context_processor
@@ -61,7 +63,8 @@ def product(id):
     product_py = dict()
 
     for item in dataItems:
-        if item['id'] == id:
+        # item['name']
+        if item.id == id:
             product_py = item
 
     return render_template(

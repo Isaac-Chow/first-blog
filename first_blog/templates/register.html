@@ -1,4 +1,4 @@
-{% extends "includes/base.html" %}
+{% extends "public/includes/base.html" %}
 
 {% block title %}
 Registration
@@ -27,14 +27,20 @@ Registration
                 </div>
             
                 <div class="form-group">
+                    {{register.phone.label(class_="mt-3") }}<span class="text-danger">*</span>
+                    {{register.phone(class_="form-control")}}
+                </div>
+
+                <div class="form-group">
                     {{register.password.label(class_="mt-3") }}<span class="text-danger">*</span>
                     {{register.password(class_="form-control")}}
                 </div>
                 
-                <div class="form-group mb-3 mt-3">
+                {#
+                <!-- <div class="form-group mb-3 mt-3"> -->
                     {{register.recaptcha(class_="form-control")}}
-                </div>
-    
+                <!-- </div> -->
+                #}
                 {{register.submit(class_="btn btn-primary mb-3 mt-3")}}
             </form>
         </div>

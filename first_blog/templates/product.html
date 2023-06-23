@@ -1,41 +1,208 @@
 <!-- [DONE] -->
-{% extends "includes/base.html" %}
+{% extends "public/includes/base.html" %}
 
 <!-- Use the product name to display the title -->
 {% block title %}
-{{product_jinja["title"]}}
+{{ product_jinja.title }}
 {% endblock %}
 
 {% block content%}
-<!-- Product Title Start -->
-<h1>
-    {{product_jinja["title"]}}
-</h1>
-<!-- Product Title End -->
+<section>
+    <div class="container pb-5 pt-3">
+        <div class="row pb-5 pt-3">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 col-md-6">
 
-<!-- Product Price Start -->
-<p>
-    Price:{{product_jinja["price"]}}
-</p>
-<!-- Product Price End -->
+                        <!-- Card -->
+                        <div class="card">
 
-<!-- Product Description Start -->
-<!-- ampersand & -->
-<p>
-    {{product_jinja["description"]}}(&lt;- That is a description incase you don't know)
-</p>
-<!-- Product Description End -->
+                            <!-- Slider -->
+                            <div class="mb-4 flickity-enabled is-fade"
+                                data-flickity="{&quot;draggable&quot;: false, &quot;fade&quot;: true}"
+                                id="productSlider" tabindex="0">
 
-<!-- Product Category Start -->
-<p>
-    Category:{{product_jinja["category"]}}
-</p>
-<!-- Product Category End -->
+                                <div class="flickity-viewport" style="height: 620px;">
+                                    <div class="flickity-slider" style="transform: translateX(0%); max-height: 100%; ">
+                                        <!-- <a href="#" data-bigpicture="{ &quot;imgSrc&quot;: &quot;{{ product_jinja.img }}&quot;}"
+                                            class="d-flex lickity-cell is-selected" style="opacity: 1; transform: translateX(0%); max-height: 100%; "> -->
+                                            <img src="{{ product_jinja.img }}" alt="{{ product_jinja.category }}" class="card-img-top" id="prod_image">
+                                        <!-- </a> -->
+                                    </div>
+                                </div>
+                            </div>
 
-<!-- Product Image Start -->
-<img src="{{product_jinja['image']}}" alt="{{ product_jinja['category'] }}">
-<!-- Product Image Start -->
-<p>
-    rating:{{product_jinja["rating"]}}
-</p>
+                        </div>
+
+
+                    </div>
+                    <div class="col-12 col-md-6 ps-lg-10">
+
+                        <!-- Header -->
+                        <div class="row mb-1">
+                            <div class="col">
+
+                                <!-- Preheading -->
+                                <a class="text-muted" href="shop.html"> {{ product_jinja.title }} </a>
+
+                            </div>
+                            <div class="d-flex col-auto">
+
+                                <!-- Rating -->
+                                <div class="d-flex">
+                                    {% for i in range(roudend_rating) %}
+                                    <i class="bi bi-star-fill"></i>
+                                    {% endfor %}
+                                    
+                                </div>
+
+                                <a class="fs-sm text-reset ms-2" href="#reviews">
+                                    Reviews {{ product_jinja.rating }}
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <!-- Heading -->
+                        <h3 class="mb-2">{{ product_jinja.title }}</h3>
+
+                        <!-- Price -->
+                        <div class="mb-7">
+                            <span class="ms-1 fs-5 fw-bolder text-primary">$ {{ product_jinja.price }}</span>
+                            <span class="fs-sm ms-1">(In Stock)</span>
+                        </div>
+                        <div class="mb-7">
+                            <!-- product description -->
+                            <p class="text-muted m-2">{{ product_jinja.desc }}</p>
+                        </div>
+
+                        <!-- Order Form -->
+                        <form>
+                            <div class="form-group">
+
+                                <!-- Label -->
+                                <p class="mb-5">
+                                    Size: <strong><span id="sizeCaption">7.5</span> US</strong>
+                                </p>
+
+                                <!-- Radio -->
+                                <div class="mb-2">
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio" id="sizeRadioOne"
+                                            value="6" data-toggle="form-caption" data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioOne">6</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio" id="sizeRadioTwo"
+                                            value="6.5" data-toggle="form-caption" data-target="#sizeCaption"
+                                            disabled="">
+                                        <label class="form-check-label" for="sizeRadioTwo">6.5</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio"
+                                            id="sizeRadioThree" value="7" data-toggle="form-caption"
+                                            data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioThree">7</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio" id="sizeRadioFour"
+                                            value="7.5" data-toggle="form-caption" data-target="#sizeCaption"
+                                            checked="">
+                                        <label class="form-check-label" for="sizeRadioFour">7.5</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio" id="sizeRadioFive"
+                                            value="8" data-toggle="form-caption" data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioFive">8</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio" id="sizeRadioSix"
+                                            value="8.5" data-toggle="form-caption" data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioSix">8.5</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio"
+                                            id="sizeRadioSeven" value="9" data-toggle="form-caption"
+                                            data-target="#sizeCaption" disabled="">
+                                        <label class="form-check-label" for="sizeRadioSeven">9</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio"
+                                            id="sizeRadioEight" value="9.5" data-toggle="form-caption"
+                                            data-target="#sizeCaption" disabled="">
+                                        <label class="form-check-label" for="sizeRadioEight">9.5</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio" id="sizeRadioNine"
+                                            value="10" data-toggle="form-caption" data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioNine">10</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio" id="sizeRadioTen"
+                                            value="10.5" data-toggle="form-caption" data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioTen">10.5</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio"
+                                            id="sizeRadioEleven" value="11" data-toggle="form-caption"
+                                            data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioEleven">11</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio"
+                                            id="sizeRadioTwelve" value="12" data-toggle="form-caption"
+                                            data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioTwelve">12</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio"
+                                            id="sizeRadioThirteen" value="13" data-toggle="form-caption"
+                                            data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioThirteen">13</label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-size mb-2">
+                                        <input type="radio" class="form-check-input" name="sizeRadio"
+                                            id="sizeRadioFourteen" value="14" data-toggle="form-caption"
+                                            data-target="#sizeCaption">
+                                        <label class="form-check-label" for="sizeRadioFourteen">14</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-lg-auto">
+                                    
+                                    <p class="">
+                                        <span class="text-heading fw-semibold">Quantity:</span>
+                                    </p>
+
+                                    <!-- Quantity -->
+                                    <select class="form-select mb-2">
+                                        <option value="1" selected="">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+
+                                </div>
+                                <div class="row gx-5 mb-7">
+                                    <div class="col-12 col-lg">
+
+                                        <!-- Submit -->
+                                        <button type="submit" class="btn w-100 btn-dark mb-2">
+                                            Add to Cart <i class="fe fe-shopping-cart ms-2"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
